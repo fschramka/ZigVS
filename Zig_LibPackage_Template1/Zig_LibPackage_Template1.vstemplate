@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+    <TemplateData>
+        <Name>Zig Library (build.zig / Folder Mode)</Name>
+        <Description>A Zig library that opens in Folder Mode and builds with build.zig.</Description>
+        <Icon>Zig_LibPackage_Template1.ico</Icon>
+        <ProjectType>Zig</ProjectType>
+        <LanguageTag>Zig</LanguageTag>
+        <SortOrder>1001</SortOrder>
+        <TemplateID>67ce9de0-aeae-4810-a39a-604bac950831</TemplateID>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>ZigLib</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PlatformTag>Windows</PlatformTag>
+        <PlatformTag>Linux</PlatformTag>
+        <PlatformTag>Android</PlatformTag>
+        <PlatformTag>macOS</PlatformTag>
+        <PlatformTag>iOS</PlatformTag>
+        <PlatformTag>WASI</PlatformTag>
+        <ProjectTypeTag>console</ProjectTypeTag>
+    </TemplateData>
+    <TemplateContent>
+        <Project File="ProjectTemplate.zigproj" ReplaceParameters="true">
+            <ProjectItem ReplaceParameters="true" TargetFileName="src\main.zig" OpenInEditor="true" >main.zig</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="build.zig">build.zig</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="build.zig.zon">build.zig.zon</ProjectItem>
+        </Project>
+    </TemplateContent>
+    <WizardExtension>
+        <Assembly>ZigVS, Version=0.15.2.3, Culture=neutral, PublicKeyToken=17a782ac45ca14b9</Assembly>
+        <FullClassName>ZigVS.TemplateWizard.ZigProjectTemplateWizard</FullClassName>
+    </WizardExtension>
+</VSTemplate>

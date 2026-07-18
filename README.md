@@ -6,6 +6,7 @@ Add support for using the [Zig programming language](https://ziglang.org/) to [V
 * Debugging and profiling can be used immediately without any special setup.
 * Zig code is easy to integrate into existing C++ and C# projects.
 
+*Note: **ZigVS currently works only with Visual Studio 2026.** Visual Studio Marketplace does not currently allow extensions to declare Visual Studio 2026 (API version 19.0) as the minimum supported target, so a VS2026-only ZigVS package cannot be published there yet.*  
 *Note: Please **update Visual Studio** before installing ZigVS. If your version of Visual Studio is older than the required version for ZigVS, a version error will appear during installation.* 
 ___
   
@@ -570,6 +571,15 @@ LuckyStar Studio LLC
 ___
 # Version History
 ```
+    Version 0.16.0.1 (2026/07/09):
+        Improvements
+            Updated packages with dependencies 
+
+        Compatibility:
+            Visual Studio 2026 18.6.2
+            Zig Tool chain: zig-windows-x86_64-0.16.0.zip
+            ZLS Language Server: zls-windows-x86_64-0.16.0.zip
+            
     Version 0.16.0.0 (2026/04/24):
         Improvements
             Added support for Zig 0.16.0 and ZLS 0.16.0

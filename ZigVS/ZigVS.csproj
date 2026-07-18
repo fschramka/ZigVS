@@ -313,14 +313,14 @@
       <Version>11.0.61030</Version>
     </PackageReference>
     <PackageReference Include="System.Collections.Immutable">
-      <Version>9.0.9</Version>
+      <Version>10.0.9</Version>
       <NoWarn>NU1603</NoWarn>
     </PackageReference>
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
-      <Version>9.0.9</Version>
+      <Version>10.0.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel">
-      <Version>17.14.1</Version>
+      <Version>18.7.0</Version>
       <NoWarn>NU1603</NoWarn>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Designer.Interfaces">
@@ -433,6 +433,13 @@
     <ProjectReference Include="..\Zig_LibProject_Template1\Zig_LibProject_Template1.csproj">
       <Project>{4E28FD2A-F331-4709-9812-5F78AE2E6374}</Project>
       <Name>Zig_LibProject_Template1</Name>
+      <VSIXSubPath>ProjectTemplates</VSIXSubPath>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+    </ProjectReference>
+    <ProjectReference Include="..\Zig_LibPackage_Template1\Zig_LibPackage_Template1.csproj">
+      <Project>{7520B572-6249-4FC2-8561-9DF6F1BE16DD}</Project>
+      <Name>Zig_LibPackage_Template1</Name>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <IncludeOutputGroupsInVSIX>TemplateProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
