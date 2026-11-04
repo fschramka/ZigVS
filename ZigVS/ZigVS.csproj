@@ -296,6 +296,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol">
       <Version>17.2.8</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.TemplateWizardInterface">
       <Version>17.10.40170</Version>
@@ -303,6 +304,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.TestWindow.Interfaces">
       <Version>11.0.61030</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="System.Collections.Immutable">
       <Version>10.0.14</Version>
@@ -313,6 +315,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel">
       <Version>18.11.0</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
       <NoWarn>NU1603</NoWarn>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Designer.Interfaces">
