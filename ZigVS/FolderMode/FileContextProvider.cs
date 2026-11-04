@@ -88,7 +88,7 @@ namespace ZigVS
                     });
 
                     string buildToolPath = !string.IsNullOrWhiteSpace(zigProbe.ResolvedPath)
-                        ? zigProbe.ResolvedPath
+                        ? zigProbe.ResolvedPath!
                         : l_GeneralOptions.ToolPathExpanded;
 
                     foreach (var l_configuration in Build.ConfigurationList())

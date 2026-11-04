@@ -50,10 +50,20 @@ namespace ZigVS
     using Microsoft.VisualStudio.Shell;
     using System;
     using System.Threading;
+    using System.Threading.Tasks;
 
     public class PackageInstaller : InstallerBase
     {
         private readonly ProjectDependencyService dependencyService = ProjectDependencyService.Instance;
+
+        /// <summary>
+        /// Refreshes the installer tool window on the UI thread.
+        /// </summary>
+        private static async Task ResetWindowAsync()
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            PackageInstallerWindowControl.GetInstance()?.Reset();
+        }
 
         public void StartCommand(string i_DirectoryString, string i_commandString, string i_optionString)
         {
@@ -72,7 +82,7 @@ namespace ZigVS
         protected void RunProcess2(string i_DirectoryString, string i_commandString, string i_optionString)
         {
             RunProcess(i_DirectoryString, i_commandString, i_optionString);
-            PackageInstallerWindowControl.GetInstance()?.Reset();
+            Common.ZigVSThreadHelper.JoinableTaskFactory.RunAsync(ResetWindowAsync).FileAndForget("zigvs/packageinstaller/resetwindow");
         }
 
         public void StartUnzip(string i_DirectoryString, string i_UrlString)
@@ -118,7 +128,7 @@ namespace ZigVS
 
             SetStatusFinished();
 
-            PackageInstallerWindowControl.GetInstance()?.Reset();
+            Common.ZigVSThreadHelper.JoinableTaskFactory.RunAsync(ResetWindowAsync).FileAndForget("zigvs/packageinstaller/resetwindow");
         }
 
         public void StartManagedDependencyInstall(ZigVSProjectNode projectNode, ProjectDependencyAddRequest request)
@@ -181,7 +191,7 @@ namespace ZigVS
             }
 
             SetStatusFinished();
-            PackageInstallerWindowControl.GetInstance()?.Reset();
+            Common.ZigVSThreadHelper.JoinableTaskFactory.RunAsync(ResetWindowAsync).FileAndForget("zigvs/packageinstaller/resetwindow");
         }
     }
 }

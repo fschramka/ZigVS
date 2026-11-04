@@ -96,8 +96,6 @@ namespace ZigVS.Test
             [Import(typeof(SVsServiceProvider))] IServiceProvider i_IServiceProvider,
             ILogger i_ILogger)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-
             m_instance = this;
 
             m_Logger = i_ILogger;
@@ -107,6 +105,15 @@ namespace ZigVS.Test
             }
 
             m_IServiceProvider = i_IServiceProvider;
+
+            // MEF may construct this part on any thread (VSSDK008), so the UI-thread-bound
+            // event subscriptions are done asynchronously once we are on the main thread.
+            Common.ZigVSThreadHelper.JoinableTaskFactory.RunAsync(SubscribeToEventsAsync).FileAndForget("zigvs/testcontainerdiscoverer/subscribe");
+        }
+
+        private async Task SubscribeToEventsAsync()
+        {
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
             // Project Mode event catch
             m_IVsSolution = (IVsSolution)m_IServiceProvider.GetService(typeof(SVsSolution));

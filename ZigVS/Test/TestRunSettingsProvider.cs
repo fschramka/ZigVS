@@ -111,7 +111,7 @@ namespace ZigVS.Test
 
                 if (l_generalOptions == null)
                 {
-                    return inputRunSettingDocument;
+                    return inputRunSettingDocument ?? doc;
                 }
 
                 ToolchainProbeResult zigProbe = CoreServices.ToolchainProbe.Probe(new ToolchainProbeRequest

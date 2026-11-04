@@ -79,12 +79,8 @@ namespace ZigVS
 
              await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            var textEditorOption = ThreadHelper.JoinableTaskFactory.Run(async () => {
-                return await TextEditorAdvancedOptions.GetLiveInstanceAsync();
-            });
-            var generalOptions = ThreadHelper.JoinableTaskFactory.Run(async () => {
-                return await GeneralOptions.GetLiveInstanceAsync();
-            });
+            var textEditorOption = await TextEditorAdvancedOptions.GetLiveInstanceAsync();
+            var generalOptions = await GeneralOptions.GetLiveInstanceAsync();
 
             r_Settings.inlay_hints_show_variable_type_hints = textEditorOption.inlay_hints_show_variable_type_hints == Switch.on;
             r_Settings.inlay_hints_show_struct_literal_field_type = textEditorOption.inlay_hints_show_struct_literal_field_type == Switch.on;

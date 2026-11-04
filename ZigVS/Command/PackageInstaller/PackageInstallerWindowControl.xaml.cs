@@ -70,12 +70,16 @@
 
         bool SwitchToUIThreadIfRequired(Action i_action)
         {
-            if (Dispatcher.CheckAccess())
+            if (ThreadHelper.CheckAccess())
             {
                 return false;
             }
 
-            _ = Dispatcher.BeginInvoke(i_action);
+            Common.ZigVSThreadHelper.JoinableTaskFactory.RunAsync(async delegate
+            {
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+                i_action();
+            }).FileAndForget("zigvs/packageinstallerwindow/uithread");
             return true;
         }
 

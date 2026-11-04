@@ -134,6 +134,16 @@ namespace ZigVS
         {
             get { return Parameter.c_PackageNameString; }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // Let tracked fire-and-forget work finish before VS shuts down.
+                Common.ZigVSThreadHelper.JoinPendingWork();
+            }
+            base.Dispose(disposing);
+        }
     }
 #pragma warning restore CS8603  
 }

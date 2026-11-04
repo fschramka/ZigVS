@@ -40,7 +40,7 @@ namespace ZigVS.CoreCompatibility.Toolchain
                     return null;
                 }
 
-                string currentDirectoryPath = directoryPath;
+                string currentDirectoryPath = directoryPath!;
                 ProjectToolOverride? toolOverride = TryReadFromDirectory(currentDirectoryPath, false);
                 if (toolOverride != null)
                 {

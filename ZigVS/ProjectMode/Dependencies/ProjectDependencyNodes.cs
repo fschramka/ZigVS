@@ -212,6 +212,7 @@ namespace ZigVS
             get => this.node.Spec.RepositoryUrl;
             set
             {
+                ThreadHelper.ThrowIfNotOnUIThread();
                 ProjectDependencySpec updated = this.node.Spec;
                 updated.RepositoryUrl = value ?? String.Empty;
                 this.node.Save(updated);
@@ -226,6 +227,7 @@ namespace ZigVS
             get => this.node.Spec.Commit;
             set
             {
+                ThreadHelper.ThrowIfNotOnUIThread();
                 ProjectDependencySpec updated = this.node.Spec;
                 updated.Commit = value ?? String.Empty;
                 this.node.Save(updated);
@@ -240,6 +242,7 @@ namespace ZigVS
             get => this.node.Spec.ModuleName;
             set
             {
+                ThreadHelper.ThrowIfNotOnUIThread();
                 ProjectDependencySpec updated = this.node.Spec;
                 updated.ModuleName = value ?? String.Empty;
                 this.node.Save(updated);
@@ -254,6 +257,7 @@ namespace ZigVS
             get => this.node.Spec.RootSource;
             set
             {
+                ThreadHelper.ThrowIfNotOnUIThread();
                 ProjectDependencySpec updated = this.node.Spec;
                 updated.RootSource = value ?? String.Empty;
                 this.node.Save(updated);

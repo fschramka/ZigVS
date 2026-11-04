@@ -1,0 +1,13 @@
+# Vendored legacy MPF (Managed Package Framework) sources.
+# This code predates the VS threading model (JoinableTaskFactory) and the VS SDK analyzers.
+# Retrofitting ThrowIfNotOnUIThread() into hundreds of methods would change runtime behavior
+# (calls that currently work from background threads would start throwing), so these
+# analyzer rules are silenced for this directory only. ZigVS's own code still gets them.
+
+[*.cs]
+# Accessing a COM/VS service should only be done on the main thread
+dotnet_diagnostic.VSTHRD010.severity = none
+# Use JoinableTaskFactory.SwitchToMainThreadAsync instead of Dispatcher/Invoke APIs
+dotnet_diagnostic.VSTHRD001.severity = none
+# Check whether the result of GetService calls is null
+dotnet_diagnostic.VSSDK006.severity = none

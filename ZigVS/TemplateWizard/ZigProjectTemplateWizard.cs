@@ -64,13 +64,13 @@ namespace ZigVS.TemplateWizard
                 return;
             }
 
-            if (Application.Current?.Dispatcher != null)
+            // Defer until VS has finished the template run (alwaysYield posts the continuation
+            // to the UI thread instead of running it inline).
+            Common.ZigVSThreadHelper.JoinableTaskFactory.RunAsync(async delegate
             {
-                Application.Current.Dispatcher.BeginInvoke(new Action(SwitchToGeneratedFolderMode));
-                return;
-            }
-
-            SwitchToGeneratedFolderMode();
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true);
+                SwitchToGeneratedFolderMode();
+            }).FileAndForget("zigvs/templatewizard/switchtofoldermode");
         }
 
         public void RunStarted(
@@ -79,6 +79,8 @@ namespace ZigVS.TemplateWizard
             WizardRunKind runKind,
             object[] customParams)
         {
+            // VS always invokes template wizards on the UI thread.
+            ThreadHelper.ThrowIfNotOnUIThread();
             m_Dte = automationObject as DTE;
             m_RunKind = runKind;
             replacementsDictionary[ZigFingerprintReplacementKey] = CreatePackageFingerprintLiteral(replacementsDictionary);

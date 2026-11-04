@@ -114,7 +114,7 @@ namespace ZigVS.Command
                 return;
             }
 
-            if (!ZigStructGenerator.TryGenerate(l_ClipboardText, out var l_ResultText, out var l_ErrorMessage))
+            if (!ZigStructGenerator.TryGenerate(l_ClipboardText!, out var l_ResultText, out var l_ErrorMessage))
             {
                 VsShellUtilities.ShowMessageBox(
                     ZigVSPackage.GetInstance(),

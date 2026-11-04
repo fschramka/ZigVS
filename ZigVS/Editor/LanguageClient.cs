@@ -79,7 +79,7 @@ namespace ZigVS
         public IEnumerable<string>? ConfigurationSections => null;
 
         public object? InitializationOptions {
-            get { return ZLS.GetSettingsAsync().Result; }
+            get { return ThreadHelper.JoinableTaskFactory.Run(() => ZLS.GetSettingsAsync()); }
         }
 
         public IEnumerable<string>? FilesToWatch => null;
@@ -149,10 +149,15 @@ namespace ZigVS
 
         public static void UpdateConfiguration()
         {
-            s_Instance?.SendConfiguration();
+            s_Instance?.SendConfigurationAsync().FileAndForget("zigvs/languageclient/sendconfiguration");
         }
 
-        public async static void RestartServer()
+        public static void RestartServer()
+        {
+            RestartServerAsync().FileAndForget("zigvs/languageclient/restartserver");
+        }
+
+        private static async Task RestartServerAsync()
         {
             if (s_Instance != null) {
                 await s_Instance.StopAsync.InvokeAsync(s_Instance, EventArgs.Empty);
@@ -160,11 +165,10 @@ namespace ZigVS
             }
         }
 
-        protected void SendConfiguration()
+        protected async Task SendConfigurationAsync()
         {
-#pragma warning disable VSTHRD110
-            NotifyDidChangeConfigurationAsync(ZLS.GetSettingsAsync().Result);
-#pragma warning restore VSTHRD110
+            var l_Settings = await ZLS.GetSettingsAsync();
+            await NotifyDidChangeConfigurationAsync(l_Settings);
         }
 #pragma warning disable CS8603, VSTHRD114
         protected Task NotifyDidChangeConfigurationAsync(object i_Settings)
@@ -178,7 +182,7 @@ namespace ZigVS
             {
                 return m_JsonRpc.NotifyWithParameterObjectAsync(l_methodString, l_DidChangeConfigurationParams);
             }
-            return null;
+            return Task.CompletedTask;
         }
 #pragma warning restore CS8603
         public Task OnServerInitializedAsync()
@@ -193,7 +197,7 @@ namespace ZigVS
 
         public Task<InitializationFailureContext?> OnServerInitializeFailedAsync(ILanguageClientInitializationInfo i_ILanguageClientInitializationInfo)
         {
-            return new Task<InitializationFailureContext?>(() => { return null; });
+            return Task.FromResult<InitializationFailureContext?>(null);
         }
 
         public event AsyncEventHandler<EventArgs>? StartAsync;

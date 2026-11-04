@@ -260,8 +260,8 @@ namespace ZigVS.Test
             ToolchainProbeResult fallbackProbe = CoreServices.ToolchainProbe.Probe(new ToolchainProbeRequest
             {
                 Label = "Fallback zig.exe",
-                RawValue = fallbackToolPath,
-                ExpandedValue = fallbackToolPath,
+                RawValue = fallbackToolPath!,
+                ExpandedValue = fallbackToolPath!,
                 DefaultFileName = Parameter.c_compilerFileName
             });
 

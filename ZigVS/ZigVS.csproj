@@ -110,6 +110,7 @@
     <Compile Include="Common\Parameter.cs" />
     <Compile Include="Common\Statusbar.cs" />
     <Compile Include="Common\Test.cs" />
+    <Compile Include="Common\ZigVSThreadHelper.cs" />
     <Compile Include="CoreCompatibility\Contracts.cs" />
     <Compile Include="CoreCompatibility\CoreServices.cs" />
     <Compile Include="CoreCompatibility\Build\FolderModeBuildArtifactResolver.cs" />

@@ -99,8 +99,16 @@ namespace ZigVS.Command
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            DTE2 l_DTE = Package.GetGlobalService(typeof(SDTE)) as DTE2;
-            TextDocument l_TextDocument = l_DTE.ActiveDocument?.Object("TextDocument") as TextDocument;
+            if (!(Package.GetGlobalService(typeof(SDTE)) is DTE2 l_DTE))
+            {
+                return;
+            }
+
+            if (!(l_DTE.ActiveDocument?.Object("TextDocument") is TextDocument l_TextDocument))
+            {
+                return;
+            }
+
             TextSelection? l_Selection = l_TextDocument.Selection;
             if (l_Selection == null)
             {
@@ -192,6 +200,7 @@ namespace ZigVS.Command
 
         private void AddSeparator(TextDocument i_TextDocument, int i_LineNumberInt, int i_IndentLengthInt)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             var l_InsertPoint = i_TextDocument.StartPoint.CreateEditPoint();
             l_InsertPoint.MoveToLineAndOffset(i_LineNumberInt, 1);
             l_InsertPoint.Insert(m_separatorString);
@@ -199,6 +208,7 @@ namespace ZigVS.Command
 
         private void RemoveSeparator(TextDocument i_TextDocument, int i_LineNumberInt, int i_IndentLengthInt)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             var l_DeletePoint = i_TextDocument.StartPoint.CreateEditPoint();
             l_DeletePoint.MoveToLineAndOffset(i_LineNumberInt, i_IndentLengthInt + 1);
             l_DeletePoint.Delete(m_separatorString.Length);

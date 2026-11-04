@@ -202,12 +202,12 @@ namespace ZigVS
             {
                 try
                 {
-                    var r = i_methodParamJToken?["range"];
+                    var r = i_methodParamJToken["range"];
                     var s = r?["start"];
                     var e = r?["end"];
                     sL = SafeInt(s?["line"]);       sC = SafeInt(s?["character"]);
                     eL = SafeInt(e?["line"]);       eC = SafeInt(e?["character"]);
-                    var uri = i_methodParamJToken?["textDocument"]?["uri"]?.ToString();
+                    var uri = i_methodParamJToken["textDocument"]?["uri"]?.ToString();
                     Debug.WriteLine($"INLAYHINT REQ uri={uri} range=({sL},{sC})-({eL},{eC})");
                 }
                 catch { }

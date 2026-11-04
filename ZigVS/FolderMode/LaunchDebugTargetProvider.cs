@@ -172,10 +172,10 @@ namespace ZigVS
                         IntermediateDirectory = l_intPath,
                         OutputDirectory = l_outPath,
                         WorkingDirectory = l_locationPath,
-                        Configuration = l_Configuration,
+                        Configuration = l_Configuration ?? string.Empty,
                         FallbackExecutableBaseName = Path.GetFileName(l_locationPath.TrimEnd(Path.DirectorySeparatorChar)),
                         ExecutableExtension = Parameter.c_windowsExecutableFileExtension,
-                        ResolvedZigExePath = l_ZigProbe.ResolvedPath
+                        ResolvedZigExePath = l_ZigProbe.ResolvedPath!
                     });
 
                     if (!l_ArtifactResolution.Success || string.IsNullOrWhiteSpace(l_ArtifactResolution.ArtifactPath))

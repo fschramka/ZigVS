@@ -105,7 +105,7 @@ namespace ZigVS
             string? zigProjAssemblyName = ReadFirstZigProjProperty(repositoryRootPath, "AssemblyName");
             if (!String.IsNullOrWhiteSpace(zigProjAssemblyName))
             {
-                return SanitizeModuleName(zigProjAssemblyName);
+                return SanitizeModuleName(zigProjAssemblyName!);
             }
 
             string buildZigZonPath = Path.Combine(repositoryRootPath, "build.zig.zon");
@@ -126,7 +126,7 @@ namespace ZigVS
             string? zigProjRootSource = ReadFirstZigProjProperty(repositoryRootPath, "RootSourceName");
             if (!String.IsNullOrWhiteSpace(zigProjRootSource))
             {
-                return NormalizeRelativePath(zigProjRootSource);
+                return NormalizeRelativePath(zigProjRootSource!);
             }
 
             string buildZigPath = Path.Combine(repositoryRootPath, "build.zig");
@@ -281,7 +281,7 @@ namespace ZigVS
                 $"refs/heads/{referenceName}",
                 $"refs/tags/{referenceName}^{{}}",
                 $"refs/tags/{referenceName}",
-                referenceName
+                referenceName!
             };
         }
 
